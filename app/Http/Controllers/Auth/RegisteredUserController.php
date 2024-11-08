@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use TCG\Voyager\Models\Role; // Importa el modelo Role de Voyager
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -42,10 +44,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Asignar el rol de 'user' (role_id = 2)
+        $user->role_id = 2; // Asignamos el role_id como 2, que es para el rol "user"
+        $user->save();
+
         event(new Registered($user));
 
         Auth::login($user);
+        //return redirect('/admin/login');
 
         return redirect()->route('voyager.login');
+        //return redirect('/admin/login')->with('success', 'Usuario registrado correctamente. Espera la aprobación del administrador.');
     }
 }

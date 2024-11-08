@@ -18,17 +18,14 @@
             background-color: {{ Voyager::setting("admin.bg_color", "#FFFFFF" ) }};
         }
         body.login .login-sidebar {
-            border-top:5px solid {{ config('voyager.primary_color','#22A7F0') }};
+            border-top: none;
         }
         @media (max-width: 767px) {
             body.login .login-sidebar {
-                border-top:0px !important;
-                border-left:5px solid {{ config('voyager.primary_color','#22A7F0') }};
+                border-top: none;
             }
         }
-        body.login .form-group-default.focused{
-            border-color:{{ config('voyager.primary_color','#22A7F0') }};
-        }
+        
         .login-button, .bar:before, .bar:after{
             background:{{ config('voyager.primary_color','#22A7F0') }};
         }
@@ -67,9 +64,9 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
+        <div class="login-sidebar">
 
-           @yield('content')
+            @yield('content')
 
         </div> <!-- .login-sidebar -->
     </div> <!-- .row -->

@@ -104,13 +104,13 @@ return [
         /*
          * Select default language
          */
-        'default' => 'en',
+        'default' => 'es',
 
         /*
          * Select languages that are supported.
          */
         'locales' => [
-            'en',
+            'es',
             //'pt',
         ],
     ],
@@ -212,12 +212,40 @@ return [
         // The allowed mimetypes to be uploaded through the media-manager.
         // 'allowed_mimetypes' => '*', //All types can be uploaded
         'allowed_mimetypes' => [
-          'image/jpeg',
-          'image/png',
-          'image/gif',
-          'image/bmp',
-          'video/mp4',
+            'image/jpeg',
+            'image/png',
+            'image/gif',
+            'image/bmp',
+            'video/mp4',
+            'application/msword',  // Para archivos .doc
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // Para archivos .docx
         ],
+
+    'upload_max_file_size' => 10240, // tamaño en KB
+    'thumbnails' => [
+        [
+            'type' => 'fit',
+            'name' => 'small',
+            'width' => 180,
+            'height' => 180,
+        ],
+        [
+            'type' => 'fit',
+            'name' => 'medium',
+            'width' => 300,
+            'height' => 300,
+        ],
+        [
+            'type' => 'fit',
+            'name' => 'large',
+            'width' => 1024,
+            'height' => 1024,
+        ],
+    ],
+    'resize' => [
+        'width' => null,
+        'height' => null,
+    ],
         //Path for media-manager. Relative to the filesystem.
         'path'                => '/',
         'show_folders'        => true,
@@ -232,14 +260,14 @@ return [
             'x'              => 0,
             'y'              => 0,
             'size'           => 15,
-       ],
-       'thumbnails'          => [
-           [
-                'type'  => 'fit',
-                'name'  => 'fit-500',
-                'width' => 500,
-                'height'=> 500
-           ],
-       ]*/
+        ],
+        'thumbnails'          => [
+            [
+                    'type'  => 'fit',
+                    'name'  => 'fit-500',
+                    'width' => 500,
+                    'height'=> 500
+            ],
+        ]*/
     ],
 ];
