@@ -3,7 +3,16 @@
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->getTranslatedAttribute('display_name_plural'))
 
 @section('page_header')
-    <div class="container-fluid">
+    <div class="container-fluid"  style="position: relative;">
+
+    <!-- Contenedor con video de fondo 
+    <div class="video-container">
+        <video autoplay muted loop class="video-header">
+            <source src="{{ asset('images/video3.mp4') }}" type="video/mp4">
+            Tu navegador no soporta la reproducción de video.
+        </video>
+    </div>-->
+
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
         </h1>
@@ -12,6 +21,11 @@
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
         @endcan
+        <!--reportes-->
+        <a href="{{ route('reporte.pdf', ['slug' => $dataType->slug]) }}" target="_blank" class="btn btn-primary">
+            <i class="voyager-document"></i> Reporte PDF
+        </a>
+        <!--fin reportes-->
         @can('delete', app($dataType->model_name))
             @include('voyager::partials.bulk-delete')
         @endcan

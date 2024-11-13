@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReporteController;
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,3 +32,6 @@ Route::put('users/{id}', [UserController::class, 'update'])->name('voyager.users
 //Route::get('admin/users', [UserController::class, 'index'])->name('admin.index');
 
 require __DIR__.'/auth.php';
+
+//reportes
+Route::get('admin/reporte-pdf/{slug}', [ReporteController::class, 'generatePdf'])->name('reporte.pdf');

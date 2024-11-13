@@ -1,25 +1,34 @@
-@php
-$dimmerGroups = Voyager::dimmers();
-@endphp
+{{-- resources/views/vendor/voyager/dimmers.blade.php --}}
 
-@forelse($dimmerGroups as $dimmerGroup)
-    @php
-    $count = $dimmerGroup->count();
-    $classes = [
-        'col-xs-12',
-        'col-sm-'.($count >= 2 ? '6' : '12'),
-        'col-md-'.($count >= 3 ? '4' : ($count >= 2 ? '6' : '12')),
-    ];
-    $class = implode(' ', $classes);
-    $prefix = "<div class='{$class}'>";
-    $surfix = '</div>';
-    @endphp
-    @if ($dimmerGroup->any())
-    <div class="clearfix container-fluid row">
-        {!! $prefix.$dimmerGroup->setSeparator($surfix.$prefix)->display().$surfix !!}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .logo-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="{{ asset('images/logo-s-f.png') }}" alt="Logo de la Institución">
     </div>
-    @endif
-
-@empty
-
-@endforelse
+</body>
+</html>
