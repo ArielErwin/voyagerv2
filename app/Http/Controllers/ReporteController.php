@@ -8,48 +8,29 @@ use App\Models\Vicerrectorado;
 use App\Models\Rectorado;
 use App\Models\Dsa;
 use App\Models\Daf;
-use App\Models\Full;
-use App\Models\Agricolas;
+
 use App\Models\Artes;
+use App\Models\Agricolas;
+use App\Models\Economicas;
 use App\Models\CienciasPuras;
 use App\Models\CienciasSociales;
 use App\Models\Derecho;
-use App\Models\Economicas;
-use App\Models\FacultadVicerrectorado;
-use App\Models\Geologia;
-use App\Models\Ingeneria;
-use App\Models\Llica;
-use App\Models\Medicina;
+use App\Models\Ingenieria;
+use App\Models\Geologica;
 use App\Models\Minera;
-use App\Models\Otros;
+use App\Models\Tecnologica;
 use App\Models\Salud;
-use App\Models\TablaArtes;
-use App\Models\TablaAgricolas;
-use App\Models\TablaCienciasPuras;
-use App\Models\TablaCienciasSociales;
-use App\Models\TablaDaf;
-use App\Models\TablaDerecho;
-use App\Models\TablaDsa;
-use App\Models\TablaEconomicas;
-use App\Models\TablaFacultadVicerrectorado;
-use App\Models\TablaGeologia;
-use App\Models\TablaIngeneria;
-use App\Models\TablaLlica;
-use App\Models\TablaMedicina;
-use App\Models\TablaMinera;
-use App\Models\TablaRectorado;
-use App\Models\TablaSalud;
-use App\Models\TablaTecnologia;
-use App\Models\TablaTupiza;
-use App\Models\TablaUncia;
-use App\Models\TablaUyuni;
-use App\Models\TablaVicerrectordo;
-use App\Models\TablaVillazon;
-use App\Models\TablaLogica;
+use App\Models\Medicina;
+use App\Models\FacultadVicerrectorado;
+
 use App\Models\Tupiza;
 use App\Models\Uncia;
 use App\Models\Uyuni;
 use App\Models\Villazon;
+use App\Models\Llica;
+
+use App\Models\Full;
+use App\Models\Otros;
 
 class ReporteController extends Controller
 {
@@ -61,48 +42,29 @@ class ReporteController extends Controller
             'rectorado' => Rectorado::class,
             'dsa' => Dsa::class,
             'daf' => Daf::class,
-            'full' => Full::class,
-            'agricolas' => Agricolas::class,
+            
             'artes' => Artes::class,
-            'ciencias_puras' => CienciasPuras::class,
-            'ciencias_sociales' => CienciasSociales::class,
-            'derecho' => Derecho::class,
+            'agricolas' => Agricolas::class,
             'economicas' => Economicas::class,
-            'facultad_vicerrectorado' => FacultadVicerrectorado::class,
-            'geologia' => Geologia::class,
-            'ingeneria' => Ingeneria::class,
-            'llica' => Llica::class,
-            'medicina' => Medicina::class,
+            'cienciaspuras' => CienciasPuras::class,
+            'cienciassociales' => CienciasSociales::class,
+            'derecho' => Derecho::class,
+            'ingenieria' => Ingenieria::class,
+            'geologica' => Geologica::class,
             'minera' => Minera::class,
-            'otros' => Otros::class,
+            'tecnologica' => Tecnologica::class,
+            'medicina' => Medicina::class,
             'salud' => Salud::class,
-            'tabla_artes' => TablaArtes::class,
-            'tabla_agricolas' => TablaAgricolas::class,
-            'tabla_ciencias_puras' => TablaCienciasPuras::class,
-            'tabla_ciencias_sociales' => TablaCienciasSociales::class,
-            'tabla_daf' => TablaDaf::class,
-            'tabla_derecho' => TablaDerecho::class,
-            'tabla_dsa' => TablaDsa::class,
-            'tabla_economicas' => TablaEconomicas::class,
-            'tabla_facultad_vicerrectorado' => TablaFacultadVicerrectorado::class,
-            'tabla_geologia' => TablaGeologia::class,
-            'tabla_ingeneria' => TablaIngeneria::class,
-            'tabla_llica' => TablaLlica::class,
-            'tabla_medicina' => TablaMedicina::class,
-            'tabla_minera' => TablaMinera::class,
-            'tabla_rectorado' => TablaRectorado::class,
-            'tabla_salud' => TablaSalud::class,
-            'tabla_tecnologia' => TablaTecnologia::class,
-            'tabla_tupiza' => TablaTupiza::class,
-            'tabla_uncia' => TablaUncia::class,
-            'tabla_uyuni' => TablaUyuni::class,
-            'tabla_vicerrectordo' => TablaVicerrectordo::class,
-            'tabla_villazon' => TablaVillazon::class,
-            'tabla_logica' => TablaLogica::class,
+            'facultadvicerrectorado' => FacultadVicerrectorado::class,
+
             'tupiza' => Tupiza::class,
             'uncia' => Uncia::class,
             'uyuni' => Uyuni::class,
             'villazon' => Villazon::class,
+            'llica' => Llica::class,
+            
+            'datosfull' => Full::class,
+            'otros' => Otros::class,
             // Otros modelos según tus tablas
         ];
 

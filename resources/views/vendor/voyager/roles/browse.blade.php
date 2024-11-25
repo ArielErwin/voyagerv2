@@ -4,38 +4,18 @@
 
 @section('page_header')
     <div class="container-fluid"  style="position: relative;">
-        
-                <h1 class="page-title">
-                    <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
-                </h1>
-                @can('add', app($dataType->model_name))
-                    <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
-                        <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
-                    </a>
-                @endcan
-                <!--reportes-->
-                    @php
-                        $excludedTables = [
-                            'tablarectorado','tablavicerrectorado','tabladsa','tabladaf','tablaartes','tablaagricolas','tablaeconomicas','tablacienciaspuras',
-                            'tablacienciassociales','tabladerecho','tablaingenieria','tablageologica','tablaminera','tablatecnologica','tablasalud','tablamedicina',
-                            'tablavicecarreras','tablatupiza','tablauncia','tablauyuni','tablavillazon','tablallica',
-                        ];
-                    @endphp
-                    @if (!in_array($dataType->slug, $excludedTables))
 
-                    <a href="{{ route('reporte.pdf', ['slug' => $dataType->slug]) }}" target="_blank" class="btn btn-primary">
-                        <i class="voyager-document"></i> Reporte PDF
-                    </a>
-                <!--fin reportes-->
-                    @can('delete', app($dataType->model_name))
-                        @include('voyager::partials.bulk-delete')
-                    @endcan
-                    <!-- Botones de redirección a otras tablas dinámicamente--> 
-                    <a href="{{ route('gestionar.tabla', ['slug' => $dataType->slug]) }}" class="btn btn-primary gestionar-btn">
-                        Detalle
-                    </a>
-        
-        @endif
+        <h1 class="page-title">
+            <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
+        </h1>
+        @can('add', app($dataType->model_name))
+            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
+                <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
+            </a>
+        @endcan
+        @can('delete', app($dataType->model_name))
+            @include('voyager::partials.bulk-delete')
+        @endcan
         @can('edit', app($dataType->model_name))
             @if(!empty($dataType->order_column) && !empty($dataType->order_display_column))
                 <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary btn-add-new">
@@ -155,6 +135,8 @@
                                                             {{ $data->{$row->field} }}
                                                         @endif
                                                     @endif
+
+
                                                     @elseif($row->type == 'image')
                                                     <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')
@@ -392,6 +374,8 @@
                 $('input[name="row_id"]').prop('checked', $(this).prop('checked')).trigger('change');
             });
         });
+
+
         var deleteFormAction;
         $('td').on('click', '.delete', function (e) {
             $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id') }}'.replace('__id', $(this).data('id'));

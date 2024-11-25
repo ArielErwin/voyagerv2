@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReporteController;
-
-
-
+use TCG\Voyager\Facades\Voyager;
+use App\Http\Controllers\GestionarTablasController;
+use App\Http\Controllers\CustomVoyagerController;
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('voyager.login');
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -35,3 +35,11 @@ require __DIR__.'/auth.php';
 
 //reportes
 Route::get('admin/reporte-pdf/{slug}', [ReporteController::class, 'generatePdf'])->name('reporte.pdf');
+
+//procedencia
+
+Route::get('/gestionar/{slug}', [GestionarTablasController::class, 'gestionar'])->name('gestionar.tabla');
+
+Route::get('/admin/{slug}', [CustomVoyagerController::class, 'index'])->name('voyager.index');
+
+

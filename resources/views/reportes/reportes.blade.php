@@ -65,12 +65,12 @@
         .titulo-reporte .titulo-texto {
             position: relative;
             top: -40px;                        /* Ajusta este valor hasta que veas que sube el texto */
-            font-size: 24px;                  /* Ajusta el tamaño de la fuente si es necesario */
+            font-size: 15px;                  /* Ajusta el tamaño de la fuente si es necesario */
             text-align: center;
             margin: 0;
         }
         .titulo-reporte .escudo {
-            width: 90px;       /* Ajusta el tamaño de los escudos aquí */
+            width: 80px;       /* Ajusta el tamaño de los escudos aquí */
             height: auto;
             margin: 0 65px;    /* Espacio entre el título y los escudos */
         }

@@ -14,15 +14,6 @@
                     </a>
                 @endcan
                 <!--reportes-->
-                    @php
-                        $excludedTables = [
-                            'tablarectorado','tablavicerrectorado','tabladsa','tabladaf','tablaartes','tablaagricolas','tablaeconomicas','tablacienciaspuras',
-                            'tablacienciassociales','tabladerecho','tablaingenieria','tablageologica','tablaminera','tablatecnologica','tablasalud','tablamedicina',
-                            'tablavicecarreras','tablatupiza','tablauncia','tablauyuni','tablavillazon','tablallica',
-                        ];
-                    @endphp
-                    @if (!in_array($dataType->slug, $excludedTables))
-
                     <a href="{{ route('reporte.pdf', ['slug' => $dataType->slug]) }}" target="_blank" class="btn btn-primary">
                         <i class="voyager-document"></i> Reporte PDF
                     </a>
@@ -30,12 +21,6 @@
                     @can('delete', app($dataType->model_name))
                         @include('voyager::partials.bulk-delete')
                     @endcan
-                    <!-- Botones de redirección a otras tablas dinámicamente--> 
-                    <a href="{{ route('gestionar.tabla', ['slug' => $dataType->slug]) }}" class="btn btn-primary gestionar-btn">
-                        Detalle
-                    </a>
-        
-        @endif
         @can('edit', app($dataType->model_name))
             @if(!empty($dataType->order_column) && !empty($dataType->order_display_column))
                 <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary btn-add-new">
@@ -155,6 +140,8 @@
                                                             {{ $data->{$row->field} }}
                                                         @endif
                                                     @endif
+
+
                                                     @elseif($row->type == 'image')
                                                     <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')

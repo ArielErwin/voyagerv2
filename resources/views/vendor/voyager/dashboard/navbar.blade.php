@@ -11,7 +11,7 @@
                 $url = route('voyager.dashboard');
                 @endphp
                 @if(count($segments) == 0)
-                    <li class="active"><i class="voyager-boat"></i> {{ __('voyager::generic.dashboard') }}</li>
+                    <li class="active"><i class="voyager-boat"></i> {{ __('PRINCIPAL') }}</li>
                 @else
                     <li class="active">
                         <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> {{ __('voyager::generic.dashboard') }}</a>

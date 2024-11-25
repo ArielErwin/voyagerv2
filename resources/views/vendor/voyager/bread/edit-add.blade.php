@@ -25,12 +25,12 @@
             <div class="col-md-12">
 
                 <div class="panel panel-bordered">
-                    <!-- form start -->
+                    <!-- inicio del formulario -->
                     <form role="form"
                             class="form-edit-add"
                             action="{{ $edit ? route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) : route('voyager.'.$dataType->slug.'.store') }}"
                             method="POST" enctype="multipart/form-data">
-                        <!-- PUT Method if we are editing -->
+                        <!-- Método PUT si estamos editando -->
                         @if($edit)
                             {{ method_field("PUT") }}
                         @endif
@@ -50,13 +50,13 @@
                                 </div>
                             @endif
 
-                            <!-- Adding / Editing -->
+                            <!-- Agregar / Editar -->
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
                             @endphp
 
                             @foreach($dataTypeRows as $row)
-                                <!-- GET THE DISPLAY OPTIONS -->
+                                <!-- OBTÉN LAS OPCIONES DE PANTALLA -->
                                 @php
                                     $display_options = $row->details->display ?? NULL;
                                     if ($dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')}) {
@@ -66,7 +66,6 @@
                                 @if (isset($row->details->legend) && isset($row->details->legend->text))
                                     <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
                                 @endif
-
                                 <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 12 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
                                     {{ $row->slugify }}
                                     <label class="control-label" for="name">{{ $row->getTranslatedAttribute('display_name') }}</label>
@@ -82,7 +81,6 @@
                                     @else
                                         {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                                     @endif
-
                                     @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
                                         {!! $after->handle($row, $dataType, $dataTypeContent) !!}
                                     @endforeach
@@ -91,7 +89,7 @@
                                             <span class="help-block">{{ $error }}</span>
                                         @endforeach
                                     @endif
-                                </div>
+                            
                             @endforeach
 
                         </div><!-- panel-body -->
@@ -143,7 +141,7 @@
         var $file;
 
         function deleteHandler(tag, isMulti) {
-          return function() {
+            return function() {
             $file = $(this).siblings(tag);
 
             params = {
@@ -157,7 +155,7 @@
 
             $('.confirm_delete_name').text(params.filename);
             $('#confirm_delete_modal').modal('show');
-          };
+            };
         }
 
         $('document').ready(function () {
@@ -209,5 +207,6 @@
             });
             $('[data-toggle="tooltip"]').tooltip();
         });
+
     </script>
 @stop

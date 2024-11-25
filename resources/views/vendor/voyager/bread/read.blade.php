@@ -32,9 +32,10 @@
 @stop
 
 @section('content')
+
     <div class="page-content read container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
 
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
                     <!-- form start -->
@@ -44,6 +45,7 @@
                             $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_read'};
                         }
                         @endphp
+                    @if($row->type != 'file') <!-- Verificamos que no sea un campo de tipo 'file' -->
                         <div class="panel-heading" style="border-bottom:0;">
                             <h3 class="panel-title">{{ $row->getTranslatedAttribute('display_name') }}</h3>
                         </div>
@@ -55,19 +57,19 @@
                                 @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => 'read', 'view' => 'read', 'options' => $row->details])
                             @elseif($row->type == "image")
                                 <img class="img-responsive"
-                                     src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
+                                        src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                             @elseif($row->type == 'multiple_images')
                                 @if(json_decode($dataTypeContent->{$row->field}))
                                     @foreach(json_decode($dataTypeContent->{$row->field}) as $file)
                                         <img class="img-responsive"
-                                             src="{{ filter_var($file, FILTER_VALIDATE_URL) ? $file : Voyager::image($file) }}">
+                                                src="{{ filter_var($file, FILTER_VALIDATE_URL) ? $file : Voyager::image($file) }}">
                                     @endforeach
                                 @else
                                     <img class="img-responsive"
-                                         src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
+                                            src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                                 @endif
                             @elseif($row->type == 'relationship')
-                                 @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
+                                    @include('voyager::formfields.relationship', ['view' => 'read', 'options' => $row->details])
                             @elseif($row->type == 'select_dropdown' && property_exists($row->details, 'options') &&
                                     !empty($row->details->options->{$dataTypeContent->{$row->field}})
                             )
@@ -113,59 +115,6 @@
                             @elseif($row->type == 'rich_text_box')
                                 @include('voyager::multilingual.input-hidden-bread-read')
                                 {!! $dataTypeContent->{$row->field} !!}
-                                <!-- Para la vista previa del archivo -->
-                            @elseif($row->type == 'file')
-                                @if(json_decode($dataTypeContent->{$row->field}))
-                                    @foreach(json_decode($dataTypeContent->{$row->field}) as $file)
-                                    <!-- Vista previa del archivo directamente -->
-                                    <div class="file-preview-container">
-                                        <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) ?: '' }}">
-                                            {{ $file->original_name ?: '' }}
-                                        </a>
-                                                <!-- Vista previa de imagen o PDF -->
-                                                @if(in_array(pathinfo($file->download_link, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <div class="image-preview">
-                                                        <img src="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}" alt="Vista previa de la imagen" class="img-fluid">
-                                                    </div>
-                                                
-                    <!-- pendiente-->                         
-                    @elseif(in_array(pathinfo($file->download_link, PATHINFO_EXTENSION), ['docx', 'doc']))
-                    <div class="word-preview">
-                        <iframe src="https://docs.google.com/viewer?url={{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}&embedded=true" width="100%" height="500px"></iframe>
-                    </div>
-                                                @else
-                                                    <div class="pdf-preview">
-                                                        <iframe src="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}" width="100%" height="500px" frameborder="0"></iframe>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        <br/>
-                                    @endforeach
-                                @elseif($dataTypeContent->{$row->field})
-                                <!-- Vista previa de un solo archivo directamente -->
-                                <div class="file-preview-container">
-                                    <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($row->field) ?: '' }}">
-                                        {{ __('voyager::generic.download') }}
-                                    </a>
-                                <!-- Vista previa de imagen o PDF -->
-                                @if(in_array(pathinfo($dataTypeContent->{$row->field}, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
-                                    <div class="image-preview">
-                                        <img src="{{ Storage::disk(config('voyager.storage.disk'))->url($dataTypeContent->{$row->field}) }}" alt="Vista previa de la imagen" class="img-fluid">
-                                    </div>
-                <!-- pendiente-->
-                @elseif(in_array(pathinfo($dataTypeContent->{$row->field}, PATHINFO_EXTENSION), ['docx', 'doc']))
-                <div class="word-preview">
-                    <iframe src="https://docs.google.com/viewer?url={{ Storage::disk(config('voyager.storage.disk'))->url($dataTypeContent->{$row->field}) }}&embedded=true" width="100%" height="500px"></iframe>
-                </div>
-
-                                @else
-                                    <div class="pdf-preview">
-                                        <iframe src="{{ Storage::disk(config('voyager.storage.disk'))->url($dataTypeContent->{$row->field}) }}" width="100%" height="500px" frameborder="0"></iframe>
-                                    </div>
-                                @endif
-                                </div>
-                            @endif
-            
                             @else
                                 @include('voyager::multilingual.input-hidden-bread-read')
                                 <p>{{ $dataTypeContent->{$row->field} }}</p>
@@ -174,13 +123,58 @@
                         @if(!$loop->last)
                             <hr style="margin:0;">
                         @endif
+                    @endif
                     @endforeach
-
+                </div>
+            </div>
+            <!-- Para la vista previa del archivo -->
+            <div class="col-md-6">
+                <div class="panel panel-bordered" style="padding-bottom:5px;">
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">Archivo</h3> <!-- Aquí agregamos el título -->
+                    </div>
+                    @foreach($dataType->readRows as $row)
+                        @if($row->type == 'file')
+                            @if(json_decode($dataTypeContent->{$row->field}))
+                                @foreach(json_decode($dataTypeContent->{$row->field}) as $file)
+                                    <div class="file-preview-container">
+                                        <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) ?: '' }}">
+                                            {{ $file->original_name ?: '' }}
+                                        </a>
+                                        @if(in_array(pathinfo($file->download_link, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                                            <div class="image-preview">
+                                                <img src="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}" alt="Vista previa de la imagen" class="img-fluid">
+                                            </div>
+                                        @else
+                                            <div class="pdf-preview">
+                                                <iframe src="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}" width="100%" height="500px" frameborder="0"></iframe>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <br/>
+                                @endforeach
+                            @elseif($dataTypeContent->{$row->field})
+                                <div class="file-preview-container">
+                                    <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($row->field) ?: '' }}">
+                                        {{ __('voyager::generic.download') }}
+                                    </a>
+                                    @if(in_array(pathinfo($dataTypeContent->{$row->field}, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+                                        <div class="image-preview">
+                                            <img src="{{ Storage::disk(config('voyager.storage.disk'))->url($dataTypeContent->{$row->field}) }}" alt="Vista previa de la imagen" class="img-fluid">
+                                        </div>
+                                    @else
+                                        <div class="pdf-preview">
+                                            <iframe src="{{ Storage::disk(config('voyager.storage.disk'))->url($dataTypeContent->{$row->field}) }}" width="100%" height="500px" frameborder="0"></iframe>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">

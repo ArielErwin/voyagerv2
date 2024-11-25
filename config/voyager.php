@@ -45,6 +45,10 @@ return [
         //'namespace' => 'App\\Models\\',
     ],
 
+    'actions' => [
+    \App\Actions\GestionarRelacion::class,  // Acción registrada globalmente
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Storage Config
@@ -270,4 +274,5 @@ return [
             ],
         ]*/
     ],
+    
 ];

@@ -24,9 +24,13 @@
             max-width: 100%;
             height: auto;
         }
+        .titulo-principal{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <h1 class="titulo-principal">GESTIÓN DOCUMENTAL</h1>
     <div class="logo-container">
         <img src="{{ asset('images/logo-s-f.png') }}" alt="Logo de la Institución">
     </div>
