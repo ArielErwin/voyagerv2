@@ -14,7 +14,7 @@
     @endif
     <style>
         body {
-            background-image: url('{{ asset("images/Background.jpg") }}');
+            background-image: url('{{ secure_asset("images/Background.jpg") }}');
             background-color: {{ Voyager::setting("admin.bg_color", "#FFFFFF" ) }};
         }
         body.login .login-sidebar {
@@ -39,7 +39,7 @@
     
     @yield('pre_css')
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/custom.css') }}">
 </head>
 <body class="login">
 <div class="container-fluid">
