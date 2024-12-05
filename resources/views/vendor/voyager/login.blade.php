@@ -4,11 +4,11 @@
     <div class="login-container">
 
     <div class="login-logo-container ">
-        <img src="{{ asset('images/logo-s-f.png') }}" alt="Logo" class="logo-container">
+        <img src="{{ secure_asset('images/logo-s-f.png') }}" alt="Logo" class="logo-container">
     </div>
 
-        <form action="{{ route('voyager.login') }}" method="POST">
-            {{ csrf_field() }}
+    <form action="{{ secure_url(route('voyager.login')) }}" method="POST">
+    {{ csrf_field() }}
             <div class="form-group form-group-default" id="emailGroup">
                 <label class="name-input">{{ __('voyager::generic.email') }}</label>
                 <div class="controls">
