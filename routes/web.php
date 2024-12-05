@@ -39,7 +39,5 @@ Route::get('admin/reporte-pdf/{slug}', [ReporteController::class, 'generatePdf']
 //procedencia
 
 Route::get('/gestionar/{slug}', [GestionarTablasController::class, 'gestionar'])->name('gestionar.tabla');
-
 Route::get('/admin/{slug}', [CustomVoyagerController::class, 'index'])->name('voyager.index');
-
 
