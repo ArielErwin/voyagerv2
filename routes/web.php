@@ -7,7 +7,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReporteController;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\GestionarTablasController;
-use App\Http\Controllers\CustomVoyagerController;
 Route::get('/', function () {
     return redirect()->route('voyager.login');
 });
@@ -39,5 +38,4 @@ Route::get('admin/reporte-pdf/{slug}', [ReporteController::class, 'generatePdf']
 //procedencia
 
 Route::get('/gestionar/{slug}', [GestionarTablasController::class, 'gestionar'])->name('gestionar.tabla');
-Route::get('/admin/{slug}', [CustomVoyagerController::class, 'index'])->name('voyager.index');
 
