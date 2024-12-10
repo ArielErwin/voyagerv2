@@ -46,7 +46,7 @@ return [
     ],
 
     'actions' => [
-    \App\Actions\GestionarRelacion::class,  // Acción registrada globalmente
+    //\App\Actions\GestionarRelacion::class,  // Acción registrada globalmente
     ],
 
     /*
